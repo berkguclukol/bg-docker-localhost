@@ -1,3 +1,7 @@
 .idea
-mongodb
-mysql
+mongodb/data
+mysql/data
+/app/node_modules/
+/app/package.json
+/app/package-lock.json
+/app/tailwind.config.js
