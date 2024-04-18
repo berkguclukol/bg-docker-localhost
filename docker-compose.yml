@@ -1,0 +1,49 @@
+version: '3.9'
+services:
+  php-fpm:
+    container_name: "Guclukol_PHP"
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./app:/var/www/html
+  apache-httpd:
+    container_name: "Guclukol_Apache_Httpd"
+    build:
+      context: .
+      dockerfile: ./apache/Dockerfile
+    volumes:
+      - ./app:/var/www/html
+    ports:
+      - "80:80"
+    depends_on:
+      - php-fpm
+      - mysql-db
+  mysql-db:
+    image: mysql:8.0
+    container_name: "Guclukol_MySQLDB_Server"
+    environment:
+      MYSQL_DATABASE: "guclukol_test_database"
+      MYSQL_ROOT_USER: "root"
+      MYSQL_ROOT_PASSWORD: "password"
+    ports:
+      - "3306:3306"
+    volumes:
+      - "./mysql/data:/var/lib/mysql"
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: "Guclukol_MySQL_UI"
+    links:
+     - mysql-db
+    ports:
+      - "8081:80"
+    environment:
+      PMA_HOST: mysql-db
+      MYSQL_ROOT_PASSWORD: "password"
+  mongodb:
+    image: mongo
+    container_name: "Guclukol_MongoDB_Server"
+    ports:
+      - '27017:27017'
+    volumes:
+      - "./mongodb/data:/data/db"
