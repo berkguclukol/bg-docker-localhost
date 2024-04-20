@@ -8,11 +8,12 @@
 [![SkillIcons](https://skillicons.dev/icons?i=php)](https://hub.docker.com/_/php)
 [![SkillIcons](https://skillicons.dev/icons?i=mysql)](https://hub.docker.com/_/mysql)
 [![SkillIcons](https://skillicons.dev/icons?i=mongo)](https://hub.docker.com/r/mongodb/mongodb-community-server)
-[![SkillIcons](https://skillicons.dev/icons?i=youtube)](https://www.youtube.com/c/berkguclukol)
 
 ### Settings:
-All settings in 2 file;
+All settings in 4 file;
 ```bash
+./.env-example
+# Rename to .env
 ./docker-compose.yml
 ./Dockerfile
 ./apache/Dockerfile
@@ -36,11 +37,12 @@ npm run watch
 ### Result:
 If you see the following texts, it means that the transaction has been completed successfully.
 ```bash
-[+] Running 6/6
- ✔ Network bglocalhost_default        Created      0.0s 
- ✔ Container Guclukol_PHP             Started      0.1s 
- ✔ Container Guclukol_MongoDB_Server  Started      0.1s 
- ✔ Container Guclukol_MySQLDB_Server  Started      0.1s 
- ✔ Container Guclukol_Apache_Httpd    Started      0.0s 
- ✔ Container Guclukol_MySQL_UI        Started      0.1s
+ [+] Running 7/7
+ ✔ Network bg-docker-localhost_default  Created   0.0s 
+ ✔ Container BG_MySQLDB_Server          Started   0.1s 
+ ✔ Container BG_MongoDB_Server          Started   0.0s 
+ ✔ Container BG_PHP_8.2                 Started   0.1s 
+ ✔ Container BG_MongoDB_UI              Started   0.0s 
+ ✔ Container BG_MySQL_UI                Started   0.0s 
+ ✔ Container BG_Apache_Httpd            Started   0.0s 
 ```

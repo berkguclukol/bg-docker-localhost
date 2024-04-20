@@ -1,14 +1,14 @@
 version: '3.9'
 services:
   php-fpm:
-    container_name: "Guclukol_PHP"
+    container_name: "${APP_NAME}_PHP_8.2"
     build:
       context: .
       dockerfile: Dockerfile
     volumes:
       - ./app:/var/www/html
   apache-httpd:
-    container_name: "Guclukol_Apache_Httpd"
+    container_name: "${APP_NAME}_Apache_Httpd"
     build:
       context: .
       dockerfile: ./apache/Dockerfile
@@ -21,11 +21,11 @@ services:
       - mysql-db
   mysql-db:
     image: mysql:8.0
-    container_name: "Guclukol_MySQLDB_Server"
+    container_name: "${APP_NAME}_MySQLDB_Server"
     environment:
-      MYSQL_DATABASE: "guclukol_test_database"
-      MYSQL_ROOT_USER: "root"
-      MYSQL_ROOT_PASSWORD: "password"
+      MYSQL_DATABASE: "docker_test_database"
+      MYSQL_ROOT_USER: ${GLOBAL_CONTAINER_USERNAME}
+      MYSQL_ROOT_PASSWORD: ${GLOBAL_CONTAINER_PASSWORD}
     ports:
       - "3306:3306"
     volumes:
@@ -33,18 +33,30 @@ services:
       - "./mysql/scripts/users.sql:/docker-entrypoint-initdb.d/users.sql"
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
-    container_name: "Guclukol_MySQL_UI"
+    container_name: "${APP_NAME}_MySQL_UI"
     links:
      - mysql-db
     ports:
       - "8081:80"
     environment:
       PMA_HOST: mysql-db
-      MYSQL_ROOT_PASSWORD: "password"
+      MYSQL_ROOT_PASSWORD: ${GLOBAL_CONTAINER_PASSWORD}
   mongodb:
     image: mongo
-    container_name: "Guclukol_MongoDB_Server"
+    container_name: "${APP_NAME}_MongoDB_Server"
     ports:
       - '27017:27017'
     volumes:
       - "./mongodb/data:/data/db"
+  mongoexpress:
+    image: mongo-express
+    container_name: "${APP_NAME}_MongoDB_UI"
+    ports:
+      - "8080:8081"
+    environment: 
+      - ME_CONFIG_MONGODB_URL=mongodb://mongodb:27017
+      - ME_CONFIG_BASICAUTH_USERNAME=${GLOBAL_CONTAINER_USERNAME}
+      - ME_CONFIG_BASICAUTH_PASSWORD=${GLOBAL_CONTAINER_PASSWORD}
+    depends_on:
+      - mongodb
+    restart: always
