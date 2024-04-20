@@ -1,6 +1,6 @@
 <?php
 try {
-    $db = new PDO("mysql:host=mysql-db;dbname=guclukol_test_database", "root", "password");
+    $db = new PDO("mysql:host=mysql-db;dbname=docker_test_database", "root", "password");
 } catch ( PDOException $e ){
     print $e->getMessage();
 }
