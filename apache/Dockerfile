@@ -9,6 +9,8 @@ RUN sed -i \
     -e '/#LoadModule deflate_module/s/^#//g' \
     # Uncomment the configuration for mod_proxy to enable proxying capabilities
     -e '/#LoadModule proxy_module/s/^#//g' \
+    # Uncomment the configuration for rewrite_module to enable redirect
+    -e '/#LoadModule rewrite_module/s/^#//g' \
     # Uncomment the configuration for mod_proxy_fcgi to enable FastCGI proxy module
     -e '/#LoadModule proxy_fcgi_module/s/^#//g' \
     /usr/local/apache2/conf/httpd.conf
