@@ -12,13 +12,13 @@ $users = $db->query("SELECT * FROM users", PDO::FETCH_OBJ)->fetchAll();
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Guclukol Docker Localhost</title>
-    <link rel="icon" href="favicon.svg"/>
+    <link rel="icon" href="src/favicon.svg"/>
     <link rel="stylesheet" href="src/output.css">
 </head>
 <body class="bg-slate-100">
     <div class="border-slate-200 bg-slate-50 m-6 rounded shadow-xl border shadow-slate-300 p-6">
         <div class="flex items-center justify-center mb-4">
-            <img src="docker_logo.svg" width="250" alt="">
+            <img src="src/docker_logo.svg" width="250" alt="">
         </div>
         <h4 class="text-center text-slate-700 font-bold text-3xl mb-4">
             Welcome to Docker Localhost.
